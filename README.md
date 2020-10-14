@@ -8,7 +8,8 @@ Usage :
 2. save and make the file executable. 
 3. Run from terminal
 4. The input file, axes for plotting can be given as the argument.
-  ommand line usage: ./egs-doseplot.py x|y|z  a,b  filename
+  command line usage: 
+    ./egs-doseplot.py x|y|z  a,b  filename
             
     x|y|z       axis of the dose profile
     a,b         coordinates along the other axes
