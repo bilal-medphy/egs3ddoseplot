@@ -4,6 +4,21 @@ import sys, re, os.path
 import numpy
 import matplotlib.pyplot as plt
 
+# function to find minimum and maximum position in list 
+def minimum(a, n): 
+  
+    # inbuilt function to find the position of minimum  
+    minvalue= min(a)
+    minpos = a.index(min(a)) 
+      
+    # inbuilt function to find the position of maximum  
+    maxvalue = max(a)
+    maxpos = a.index(max(a))  
+      
+    # printing the position  
+    print ("The maximum is ", maxvalue, " at position", maxpos + 1  )
+    print ("The minimum is ", minvalue, " at position", minpos + 1)
+      
 if (len(sys.argv) < 2):
     print ("This can be used both ways : using command line arguments or interactive mode")
     print ('''\ncommand line usage: %s  x|y|z  a,b  filename
@@ -29,13 +44,13 @@ if (len(sys.argv) < 2):
        axis  = ['x', 'y', 'z'].index(var)                      # axis number: x=0, y=1, z=3
     else :
         axis = 2                                                # assume z axis plot
-        Print ("No axis selected. z axis assumed ")
+        print ("No axis selected. z axis assumed ")
     where = input("Enter the values of other axis(a,b) :")
     if (where != "") :
         where = list(map(float,where.split(',')))               # position of the axis in x,y form
     else:
         where = [0,0]                                           # assume 0,0 dd curve
-        Print ("No coordinates for other axis selected. 0,0 assumed")
+        print ("No coordinates for other axis selected. 0,0 assumed")
 
 else:
     # simplistic command-line parsing
@@ -63,7 +78,8 @@ errs  = data[Nd+Ng:]                                 # flat array of Nd = nx*ny*
 del data                                             # make sure we don't refer to data by mistake from now on
 # close 3ddose file
 dosefile.close()
-
+print ('max and min within the whole matrix :\n') 
+minimum(dose, len(dose)) 
 
 # setup variables for current axis
 grid   = [xgrid, ygrid, zgrid]                       # voxel boundaries in x, y, z
@@ -95,7 +111,8 @@ start  = index[0]*step[0] + index[1]*step[1]         # starting voxel index
 end    = start + jump[axis]                          # "end" voxel index
 mydose = dose[start:end:mystep]                      # dose slice
 myerrs = errs[start:end:mystep]                      # relative error slice
-
+print ('max and min within the chosen plane :\n') 
+minimum(dose[start:end:mystep] , len(dose[start:end:mystep] )) 
 # print xmgrace format commands for this set
 print ('''\
 @   s%d errorbar length 0
